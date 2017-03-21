@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry location="D:/MavenRepository/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar" />
+	<!-- <classPathEntry location="E:/mysql-connector-java.jar" /> -->
+	<context id="context1" targetRuntime="MyBatis3">
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.1.225:8066/jz_star?useUnicode=true&amp;characterEncoding=UTF-8"
+			userId="mycat" password="mycat" />
+			
+		<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.1.189:3366/jz_yaya?useUnicode=true&amp;characterEncoding=UTF-8"
+			userId="dba" password="mysql" /> -->
+		<javaModelGenerator targetPackage="com.jiuzhi.biz.yaya.entity" targetProject="src">
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.jiuzhi.biz.yaya.provider.dao" targetProject="src" />
+		<javaClientGenerator targetPackage="com.jiuzhi.biz.yaya.provider.dao" targetProject="src" type="XMLMAPPER" />
+		<!-- 
+		<table domainObjectName="Reinforce" tableName="t_reinforce">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table>
+		
+		<table domainObjectName="ReinforceUser" tableName="t_reinforce_user">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table>
+		
+		<table domainObjectName="ReinforceVote" tableName="t_reinforce_vote">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table>
+		 -->
+		<!--  
+		<table domainObjectName="EggsHistory" tableName="t_eggs_history">
+			<generatedKey type="post" identity="true" column="member_id" sqlStatement="MySql" />
+		</table> -->
+		<!-- <table domainObjectName="EggsHistoryDetail" tableName="t_eggs_history_detail">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table> -->
+		
+		<!-- <table domainObjectName="BbsHot" tableName="t_bbs_hot">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table>
+		<table domainObjectName="BbsHotPosts" tableName="t_bbs_hot_posts">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table> -->
+		
+		<!-- <table domainObjectName="FanPostsReply" tableName="t_fan_posts_reply">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table>
+		<table domainObjectName="FanPostsReplyUser" tableName="t_fan_posts_reply_user">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table>
+		<table domainObjectName="FanPostsReplyTemporary" tableName="t_fan_posts_reply_temporary">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table> -->
+		
+		<table domainObjectName="StarRouter" tableName="t_star_router">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table>
+		
+		<!-- <table domainObjectName="EggsLuckyStar" tableName="t_eggs_lucky_star">
+			<generatedKey type="post" identity="true" column="member_id" sqlStatement="MySql" />
+		</table> -->
+		
+		<!-- <table domainObjectName="PartyInfo" tableName="t_party_info">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table> -->
+		
+		
+		 
+		<!--  <table domainObjectName="Merchant" tableName="t_merchant">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table> -->
+		
+<!-- 		<javaModelGenerator targetPackage="com.jiuzhi.biz.yaya.entity" targetProject="src">
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.jiuzhi.biz.yaya.provider.dao" targetProject="src" />
+		<javaClientGenerator targetPackage="com.jiuzhi.biz.yaya.provider.dao" targetProject="src" type="XMLMAPPER" />
+		
+		<table domainObjectName="LiveStatus" tableName="t_live_status">
+			<generatedKey type="post" identity="true" column="id" sqlStatement="MySql" />
+		</table> -->
+		
+	
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,30 @@
+package com.kuaigou.biz.common.provider.dao;
+
+import com.kuaigou.biz.common.entity.PaymentType;
+import com.kuaigou.biz.common.entity.PaymentTypeExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+public interface PaymentTypeMapper {
+    int countByExample(PaymentTypeExample example);
+
+    int deleteByExample(PaymentTypeExample example);
+
+    int deleteByPrimaryKey(Long id);
+
+    int insert(PaymentType record);
+
+    int insertSelective(PaymentType record);
+
+    List<PaymentType> selectByExample(PaymentTypeExample example);
+
+    PaymentType selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") PaymentType record, @Param("example") PaymentTypeExample example);
+
+    int updateByExample(@Param("record") PaymentType record, @Param("example") PaymentTypeExample example);
+
+    int updateByPrimaryKeySelective(PaymentType record);
+
+    int updateByPrimaryKey(PaymentType record);
+}

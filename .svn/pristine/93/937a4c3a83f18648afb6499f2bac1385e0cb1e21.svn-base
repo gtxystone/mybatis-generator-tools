@@ -1,0 +1,30 @@
+package com.kuaigou.biz.user.provider.dao;
+
+import com.kuaigou.biz.user.entity.MemberAccount;
+import com.kuaigou.biz.user.entity.MemberAccountExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+public interface MemberAccountMapper {
+    int countByExample(MemberAccountExample example);
+
+    int deleteByExample(MemberAccountExample example);
+
+    int deleteByPrimaryKey(Long id);
+
+    int insert(MemberAccount record);
+
+    int insertSelective(MemberAccount record);
+
+    List<MemberAccount> selectByExample(MemberAccountExample example);
+
+    MemberAccount selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") MemberAccount record, @Param("example") MemberAccountExample example);
+
+    int updateByExample(@Param("record") MemberAccount record, @Param("example") MemberAccountExample example);
+
+    int updateByPrimaryKeySelective(MemberAccount record);
+
+    int updateByPrimaryKey(MemberAccount record);
+}

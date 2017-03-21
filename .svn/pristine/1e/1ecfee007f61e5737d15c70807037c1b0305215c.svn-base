@@ -1,0 +1,188 @@
+package com.kuaigou.biz.user.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class MemberAccount implements Serializable {
+    private Long id;
+
+    private String guid;
+
+    private String mobile;
+
+    private Short mobileValidity;
+
+    private String nickName;
+
+    private String portrait;
+
+    private String password;
+
+    private String remark;
+
+    private String salt;
+
+    private Short accountType;
+
+    private Short verifyState;
+
+    private Short state;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private String createBy;
+
+    private String updateBy;
+
+    private Short createType;
+
+    private Short updateType;
+
+    private static final long serialVersionUID = 1L;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid == null ? null : guid.trim();
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public Short getMobileValidity() {
+        return mobileValidity;
+    }
+
+    public void setMobileValidity(Short mobileValidity) {
+        this.mobileValidity = mobileValidity;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
+    }
+
+    public String getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        this.portrait = portrait == null ? null : portrait.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
+    }
+
+    public Short getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(Short accountType) {
+        this.accountType = accountType;
+    }
+
+    public Short getVerifyState() {
+        return verifyState;
+    }
+
+    public void setVerifyState(Short verifyState) {
+        this.verifyState = verifyState;
+    }
+
+    public Short getState() {
+        return state;
+    }
+
+    public void setState(Short state) {
+        this.state = state;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy == null ? null : createBy.trim();
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy == null ? null : updateBy.trim();
+    }
+
+    public Short getCreateType() {
+        return createType;
+    }
+
+    public void setCreateType(Short createType) {
+        this.createType = createType;
+    }
+
+    public Short getUpdateType() {
+        return updateType;
+    }
+
+    public void setUpdateType(Short updateType) {
+        this.updateType = updateType;
+    }
+}

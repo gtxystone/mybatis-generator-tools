@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kuaigou.biz.common.provider.dao.PaymentConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.kuaigou.biz.common.entity.PaymentConfig" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <result column="fee_type" property="feeType" jdbcType="TINYINT" />
+    <result column="fee" property="fee" jdbcType="DECIMAL" />
+    <result column="bargainor_id" property="bargainorId" jdbcType="VARCHAR" />
+    <result column="bargainor_key" property="bargainorKey" jdbcType="VARCHAR" />
+    <result column="order_list" property="orderList" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="create_type" property="createType" jdbcType="SMALLINT" />
+    <result column="update_type" property="updateType" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.kuaigou.biz.common.entity.PaymentConfig" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, type_id, fee_type, fee, bargainor_id, bargainor_key, order_list, state, 
+    create_time, update_time, create_by, update_by, create_type, update_type
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.kuaigou.biz.common.entity.PaymentConfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_payment_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.kuaigou.biz.common.entity.PaymentConfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_payment_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_payment_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_payment_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.kuaigou.biz.common.entity.PaymentConfigExample" >
+    delete from sys_payment_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.kuaigou.biz.common.entity.PaymentConfig" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_payment_config (name, type_id, fee_type, 
+      fee, bargainor_id, bargainor_key, 
+      order_list, state, create_time, 
+      update_time, create_by, update_by, 
+      create_type, update_type, description
+      )
+    values (#{name,jdbcType=VARCHAR}, #{typeId,jdbcType=BIGINT}, #{feeType,jdbcType=TINYINT}, 
+      #{fee,jdbcType=DECIMAL}, #{bargainorId,jdbcType=VARCHAR}, #{bargainorKey,jdbcType=VARCHAR}, 
+      #{orderList,jdbcType=INTEGER}, #{state,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{createType,jdbcType=SMALLINT}, #{updateType,jdbcType=SMALLINT}, #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kuaigou.biz.common.entity.PaymentConfig" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_payment_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="feeType != null" >
+        fee_type,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="bargainorId != null" >
+        bargainor_id,
+      </if>
+      <if test="bargainorKey != null" >
+        bargainor_key,
+      </if>
+      <if test="orderList != null" >
+        order_list,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="createType != null" >
+        create_type,
+      </if>
+      <if test="updateType != null" >
+        update_type,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="feeType != null" >
+        #{feeType,jdbcType=TINYINT},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="bargainorId != null" >
+        #{bargainorId,jdbcType=VARCHAR},
+      </if>
+      <if test="bargainorKey != null" >
+        #{bargainorKey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderList != null" >
+        #{orderList,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null" >
+        #{createType,jdbcType=SMALLINT},
+      </if>
+      <if test="updateType != null" >
+        #{updateType,jdbcType=SMALLINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.kuaigou.biz.common.entity.PaymentConfigExample" resultType="java.lang.Integer" >
+    select count(*) from sys_payment_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_payment_config
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null" >
+        type_id = #{record.typeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.feeType != null" >
+        fee_type = #{record.feeType,jdbcType=TINYINT},
+      </if>
+      <if test="record.fee != null" >
+        fee = #{record.fee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bargainorId != null" >
+        bargainor_id = #{record.bargainorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bargainorKey != null" >
+        bargainor_key = #{record.bargainorKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderList != null" >
+        order_list = #{record.orderList,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createType != null" >
+        create_type = #{record.createType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.updateType != null" >
+        update_type = #{record.updateType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sys_payment_config
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=BIGINT},
+      fee_type = #{record.feeType,jdbcType=TINYINT},
+      fee = #{record.fee,jdbcType=DECIMAL},
+      bargainor_id = #{record.bargainorId,jdbcType=VARCHAR},
+      bargainor_key = #{record.bargainorKey,jdbcType=VARCHAR},
+      order_list = #{record.orderList,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=SMALLINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_type = #{record.createType,jdbcType=SMALLINT},
+      update_type = #{record.updateType,jdbcType=SMALLINT},
+      description = #{record.description,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_payment_config
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=BIGINT},
+      fee_type = #{record.feeType,jdbcType=TINYINT},
+      fee = #{record.fee,jdbcType=DECIMAL},
+      bargainor_id = #{record.bargainorId,jdbcType=VARCHAR},
+      bargainor_key = #{record.bargainorKey,jdbcType=VARCHAR},
+      order_list = #{record.orderList,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=SMALLINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_type = #{record.createType,jdbcType=SMALLINT},
+      update_type = #{record.updateType,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kuaigou.biz.common.entity.PaymentConfig" >
+    update sys_payment_config
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="feeType != null" >
+        fee_type = #{feeType,jdbcType=TINYINT},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="bargainorId != null" >
+        bargainor_id = #{bargainorId,jdbcType=VARCHAR},
+      </if>
+      <if test="bargainorKey != null" >
+        bargainor_key = #{bargainorKey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderList != null" >
+        order_list = #{orderList,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null" >
+        create_type = #{createType,jdbcType=SMALLINT},
+      </if>
+      <if test="updateType != null" >
+        update_type = #{updateType,jdbcType=SMALLINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kuaigou.biz.common.entity.PaymentConfig" >
+    update sys_payment_config
+    set name = #{name,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=BIGINT},
+      fee_type = #{feeType,jdbcType=TINYINT},
+      fee = #{fee,jdbcType=DECIMAL},
+      bargainor_id = #{bargainorId,jdbcType=VARCHAR},
+      bargainor_key = #{bargainorKey,jdbcType=VARCHAR},
+      order_list = #{orderList,jdbcType=INTEGER},
+      state = #{state,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      create_type = #{createType,jdbcType=SMALLINT},
+      update_type = #{updateType,jdbcType=SMALLINT},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kuaigou.biz.common.entity.PaymentConfig" >
+    update sys_payment_config
+    set name = #{name,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=BIGINT},
+      fee_type = #{feeType,jdbcType=TINYINT},
+      fee = #{fee,jdbcType=DECIMAL},
+      bargainor_id = #{bargainorId,jdbcType=VARCHAR},
+      bargainor_key = #{bargainorKey,jdbcType=VARCHAR},
+      order_list = #{orderList,jdbcType=INTEGER},
+      state = #{state,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      create_type = #{createType,jdbcType=SMALLINT},
+      update_type = #{updateType,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

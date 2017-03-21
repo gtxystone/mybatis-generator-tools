@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuaigou.biz.user.provider.dao.MemberAccountMapper">
+  <resultMap id="BaseResultMap" type="com.kuaigou.biz.user.entity.MemberAccount">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="guid" jdbcType="CHAR" property="guid" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="mobile_validity" jdbcType="SMALLINT" property="mobileValidity" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="portrait" jdbcType="VARCHAR" property="portrait" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="salt" jdbcType="CHAR" property="salt" />
+    <result column="account_type" jdbcType="SMALLINT" property="accountType" />
+    <result column="verify_state" jdbcType="SMALLINT" property="verifyState" />
+    <result column="state" jdbcType="SMALLINT" property="state" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_type" jdbcType="SMALLINT" property="createType" />
+    <result column="update_type" jdbcType="SMALLINT" property="updateType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, guid, mobile, mobile_validity, nick_name, portrait, password, remark, salt, account_type, 
+    verify_state, state, create_time, update_time, create_by, update_by, create_type, 
+    update_type
+  </sql>
+  <select id="selectByExample" parameterType="com.kuaigou.biz.user.entity.MemberAccountExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_member_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_member_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_member_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.kuaigou.biz.user.entity.MemberAccountExample">
+    delete from sys_member_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.kuaigou.biz.user.entity.MemberAccount">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_member_account (guid, mobile, mobile_validity, 
+      nick_name, portrait, password, 
+      remark, salt, account_type, 
+      verify_state, state, create_time, 
+      update_time, create_by, update_by, 
+      create_type, update_type)
+    values (#{guid,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR}, #{mobileValidity,jdbcType=SMALLINT}, 
+      #{nickName,jdbcType=VARCHAR}, #{portrait,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{salt,jdbcType=CHAR}, #{accountType,jdbcType=SMALLINT}, 
+      #{verifyState,jdbcType=SMALLINT}, #{state,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{createType,jdbcType=SMALLINT}, #{updateType,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kuaigou.biz.user.entity.MemberAccount">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_member_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="guid != null">
+        guid,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="mobileValidity != null">
+        mobile_validity,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="portrait != null">
+        portrait,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="accountType != null">
+        account_type,
+      </if>
+      <if test="verifyState != null">
+        verify_state,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createType != null">
+        create_type,
+      </if>
+      <if test="updateType != null">
+        update_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="guid != null">
+        #{guid,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileValidity != null">
+        #{mobileValidity,jdbcType=SMALLINT},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null">
+        #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=CHAR},
+      </if>
+      <if test="accountType != null">
+        #{accountType,jdbcType=SMALLINT},
+      </if>
+      <if test="verifyState != null">
+        #{verifyState,jdbcType=SMALLINT},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null">
+        #{createType,jdbcType=SMALLINT},
+      </if>
+      <if test="updateType != null">
+        #{updateType,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.kuaigou.biz.user.entity.MemberAccountExample" resultType="java.lang.Integer">
+    select count(*) from sys_member_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_member_account
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.guid != null">
+        guid = #{record.guid,jdbcType=CHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileValidity != null">
+        mobile_validity = #{record.mobileValidity,jdbcType=SMALLINT},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.portrait != null">
+        portrait = #{record.portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salt != null">
+        salt = #{record.salt,jdbcType=CHAR},
+      </if>
+      <if test="record.accountType != null">
+        account_type = #{record.accountType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.verifyState != null">
+        verify_state = #{record.verifyState,jdbcType=SMALLINT},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createType != null">
+        create_type = #{record.createType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.updateType != null">
+        update_type = #{record.updateType,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_member_account
+    set id = #{record.id,jdbcType=BIGINT},
+      guid = #{record.guid,jdbcType=CHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      mobile_validity = #{record.mobileValidity,jdbcType=SMALLINT},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      portrait = #{record.portrait,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      salt = #{record.salt,jdbcType=CHAR},
+      account_type = #{record.accountType,jdbcType=SMALLINT},
+      verify_state = #{record.verifyState,jdbcType=SMALLINT},
+      state = #{record.state,jdbcType=SMALLINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_type = #{record.createType,jdbcType=SMALLINT},
+      update_type = #{record.updateType,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kuaigou.biz.user.entity.MemberAccount">
+    update sys_member_account
+    <set>
+      <if test="guid != null">
+        guid = #{guid,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileValidity != null">
+        mobile_validity = #{mobileValidity,jdbcType=SMALLINT},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null">
+        portrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=CHAR},
+      </if>
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=SMALLINT},
+      </if>
+      <if test="verifyState != null">
+        verify_state = #{verifyState,jdbcType=SMALLINT},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null">
+        create_type = #{createType,jdbcType=SMALLINT},
+      </if>
+      <if test="updateType != null">
+        update_type = #{updateType,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kuaigou.biz.user.entity.MemberAccount">
+    update sys_member_account
+    set guid = #{guid,jdbcType=CHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      mobile_validity = #{mobileValidity,jdbcType=SMALLINT},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=CHAR},
+      account_type = #{accountType,jdbcType=SMALLINT},
+      verify_state = #{verifyState,jdbcType=SMALLINT},
+      state = #{state,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      create_type = #{createType,jdbcType=SMALLINT},
+      update_type = #{updateType,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.kuaigou.biz.user.entity.MemberAccount">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="guid" jdbcType="CHAR" property="guid" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="mobile_validity" jdbcType="TINYINT" property="mobileValidity" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="portrait" jdbcType="VARCHAR" property="portrait" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="salt" jdbcType="CHAR" property="salt" />
+    <result column="account_type" jdbcType="TINYINT" property="accountType" />
+    <result column="verify_state" jdbcType="TINYINT" property="verifyState" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_type" jdbcType="TINYINT" property="createType" />
+    <result column="update_type" jdbcType="TINYINT" property="updateType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, guid, mobile, mobile_validity, nick_name, portrait, password, remark, salt, account_type, 
+    verify_state, state, create_time, update_time, create_by, update_by, create_type, 
+    update_type
+  </sql>
+  <select id="selectByExample" parameterType="com.kuaigou.biz.user.entity.MemberAccountExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_member_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_member_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_member_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.kuaigou.biz.user.entity.MemberAccountExample">
+    delete from sys_member_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.kuaigou.biz.user.entity.MemberAccount">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_member_account (guid, mobile, mobile_validity, 
+      nick_name, portrait, password, 
+      remark, salt, account_type, 
+      verify_state, state, create_time, 
+      update_time, create_by, update_by, 
+      create_type, update_type)
+    values (#{guid,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR}, #{mobileValidity,jdbcType=TINYINT}, 
+      #{nickName,jdbcType=VARCHAR}, #{portrait,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{salt,jdbcType=CHAR}, #{accountType,jdbcType=TINYINT}, 
+      #{verifyState,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{createType,jdbcType=TINYINT}, #{updateType,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kuaigou.biz.user.entity.MemberAccount">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_member_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="guid != null">
+        guid,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="mobileValidity != null">
+        mobile_validity,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="portrait != null">
+        portrait,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="accountType != null">
+        account_type,
+      </if>
+      <if test="verifyState != null">
+        verify_state,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createType != null">
+        create_type,
+      </if>
+      <if test="updateType != null">
+        update_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="guid != null">
+        #{guid,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileValidity != null">
+        #{mobileValidity,jdbcType=TINYINT},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null">
+        #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=CHAR},
+      </if>
+      <if test="accountType != null">
+        #{accountType,jdbcType=TINYINT},
+      </if>
+      <if test="verifyState != null">
+        #{verifyState,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null">
+        #{createType,jdbcType=TINYINT},
+      </if>
+      <if test="updateType != null">
+        #{updateType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.kuaigou.biz.user.entity.MemberAccountExample" resultType="java.lang.Integer">
+    select count(*) from sys_member_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_member_account
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.guid != null">
+        guid = #{record.guid,jdbcType=CHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileValidity != null">
+        mobile_validity = #{record.mobileValidity,jdbcType=TINYINT},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.portrait != null">
+        portrait = #{record.portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salt != null">
+        salt = #{record.salt,jdbcType=CHAR},
+      </if>
+      <if test="record.accountType != null">
+        account_type = #{record.accountType,jdbcType=TINYINT},
+      </if>
+      <if test="record.verifyState != null">
+        verify_state = #{record.verifyState,jdbcType=TINYINT},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createType != null">
+        create_type = #{record.createType,jdbcType=TINYINT},
+      </if>
+      <if test="record.updateType != null">
+        update_type = #{record.updateType,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_member_account
+    set id = #{record.id,jdbcType=BIGINT},
+      guid = #{record.guid,jdbcType=CHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      mobile_validity = #{record.mobileValidity,jdbcType=TINYINT},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      portrait = #{record.portrait,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      salt = #{record.salt,jdbcType=CHAR},
+      account_type = #{record.accountType,jdbcType=TINYINT},
+      verify_state = #{record.verifyState,jdbcType=TINYINT},
+      state = #{record.state,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      create_type = #{record.createType,jdbcType=TINYINT},
+      update_type = #{record.updateType,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kuaigou.biz.user.entity.MemberAccount">
+    update sys_member_account
+    <set>
+      <if test="guid != null">
+        guid = #{guid,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileValidity != null">
+        mobile_validity = #{mobileValidity,jdbcType=TINYINT},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null">
+        portrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=CHAR},
+      </if>
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=TINYINT},
+      </if>
+      <if test="verifyState != null">
+        verify_state = #{verifyState,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null">
+        create_type = #{createType,jdbcType=TINYINT},
+      </if>
+      <if test="updateType != null">
+        update_type = #{updateType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kuaigou.biz.user.entity.MemberAccount">
+    update sys_member_account
+    set guid = #{guid,jdbcType=CHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      mobile_validity = #{mobileValidity,jdbcType=TINYINT},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=CHAR},
+      account_type = #{accountType,jdbcType=TINYINT},
+      verify_state = #{verifyState,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      create_type = #{createType,jdbcType=TINYINT},
+      update_type = #{updateType,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
